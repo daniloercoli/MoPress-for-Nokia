@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>MoPress for Nokia</title>
+ 
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ 
+		<link href="styles/reset.css" rel="stylesheet" type="text/css" />
+		<link href="styles/baseStyles.css" rel="stylesheet" type="text/css" />
+		<link href="styles/wordpress.css" rel="stylesheet" type="text/css" />
+		<link href="styles/miniview.css" rel="stylesheet" type="text/css" />
+
+		<script src="js/fakewidget.js" type="text/javascript"></script>
+		<script src="js/JSON.js" type="text/javascript"></script>
+		<script src="js/Ajax.js" type="text/javascript"></script>
+		<!-- script src="js/json.js" type="text/javascript"></script -->
+		<script src="js/log4js.js" type="text/javascript"></script>
+		<script	src="js/Utils.js" type="text/javascript"></script> 
+		<script src="js/xmlrpc-client.js" type="text/javascript"></script>
+		<script src="js/XmlRpcConnections.js" type="text/javascript"></script>
+		<script src="js/BaseController.js" type="text/javascript"></script>
+		<script src="js/SettingsController.js" type="text/javascript"></script>
+		<script src="js/AddBlogsController.js" type="text/javascript"></script>
+		<script src="js/MainController.js" type="text/javascript"></script>
+		<script src="js/BlogController.js" type="text/javascript"></script>
+		<script src="js/BlogOptionsController.js" type="text/javascript"></script>
+		<script src="js/CommentsController.js" type="text/javascript"></script>
+		<script src="js/CommentController.js" type="text/javascript"></script>
+		<script src="js/NewPostController.js" type="text/javascript"></script>
+		<script src="js/MiniView.js" type="text/javascript"></script>
+		<script src="js/Menu.js" type="text/javascript"></script>
+
+		<script type="text/javascript" src="scripts/templates.js"></script>
+		<script type="text/javascript" src="scripts/main.js"></script>
+		
+	</head>
+	<body onload="WP.Controller.init()">
+		<!-- Known Issue: To avoid having the embed tag visible (it extends the height of the body)
+                  we need to put it in a div and position that div off screen. 
+<div style="position: absolute; top: -30px;">
+	<embed id='sysinfo' type='application/x-systeminfo-widget' hidden='yes'/>
+</div> -->
+		<div id="wrap">
+			
+			<div id="splash_screen">
+                <img id="splash_img" src="images/splash.gif"/>
+				<img id="splash_img_small" src="images/splash_small.gif"/>
+            </div>
+			
+			<!-- LOADER -->
+			<div id="results_loader" class="popup" style="display: none;">
+				<table class="popup_window">
+					<tr><td>&nbsp;</td></tr>
+					<tr class="background">
+						<td class="loader">
+							<!-- img src="images/img-logo.png" alt="Danais s.r.l" -->
+							<div id="loaderLoadingTitle" class="title"></div>
+							<img id="loaderProgressBar" src="images/ProgressBarUnknown.gif" alt="Loader" />
+							<div id="loaderLoadingSubtitle" class="subtitle"></div>
+							<p align="center">
+								<a href="#" id="loaderLoadingButton" class="button-flat">Cancel</a>
+							</p>
+					    </td>
+					</tr>                
+					<tr><td>&nbsp;</td></tr>
+				</table>
+			</div>
+			
+			<!-- ERROR Dialog -->
+			<div id="error_popup" class="popup" style="display: none;">
+				<table class="popup_window">
+					<tr><td>&nbsp;</td></tr>
+					<tr class="background">
+						<td class="loader">
+							<div id="errorTitle" class="title"></div>
+							<img src="images/error.png" alt="Error Img" />
+							<div id="errorMessage" class="subtitle"></div>
+							<p align="center">
+							<a href="#" onclick="WP.Controller.hideErrorDialog();" class="button-flat">Close</a>
+							</p>
+					    </td>
+					</tr>                
+					<tr><td>&nbsp;</td></tr>
+				</table>
+			</div>
+
+			<!-- TOP BAR -->
+			<div id="top_bar" style="display: none;">
+		        <table cellspacing="0" class="top_table">
+		            <tr>
+		                <td class="top_button">
+							<a id="button_t1" href="#" class="button-flat">Back</a>
+		                </td>
+		                <td class="top_title"><div class="title"></div></td>
+		                <td class="top_button">
+							<a id="button_t2" href="#" class="button-flat">Exit</a>
+		                </td>
+		            </tr>
+		        </table> 
+			</div>	 <!-- end of 'top_bar' -->
+
+			<!-- div id="header" style="display: none;">
+				<div class="branding">
+					<a href="http://www.danais.it" onclick="widget.openURL(this.href); return false;">
+					<img src="images/img-logo.png" alt="Logo" />	
+					</a>
+					<p>WordPress for Nokia</p>
+					<p>A Danais Creations</p>
+				</div>
+				<a id="button_exit" href="#" class="button-flat">Exit</a>
+			</div -->
+ 
+			<div id="content">
+				
+				<!-- HOME screen -->
+				<div id="home_screen" class="screen" style="display: none;">
+				  	<h3>MoPress for Nokia</h3>
+					<!-- img id="logo" class="logo" src="images/logo.png" / -->
+					
+					<ul id="home_screen_empty_list" class="list">
+						<li><a onclick="WP.Controller.showAddBlogsScreen();" href="#">Setup your blog</a></li>
+					</ul>
+					
+					<ul id="home_screen_blogs_list" class="list" style="display: none;">
+
+					</ul>
+					
+					<br />
+					<ul class="list">
+						<li><a onclick="WP.Controller.showSettingsScreen();" href="#">Settings</a></li>
+						<li><a onclick="WP.Layout.gotoScreen('pnlAbout');" href="#">About</a></li>
+					</ul>
+					
+				</div>
+				
+				<!-- Add a blog screen -->
+				<div id="pnlFirstTimeWizard" class="screen" style="display: none;">
+					<div id="wizardStep1">        
+					       <h4>Setup a connection with your WordPress sites.</h4>
+						   <div id="lblErrorWizardStep2"></div>						   
+                           <form id="formAddBlogs" onsubmit="return false;">
+                               <fieldset>
+                                   <label>Username</label>
+                                   <input type="text" id="txtUserName" value="" />
+                                   <label>Password</label>
+                                   <input type="password" id="txtPassword" value="" />
+                                   <label>Blog url</label>
+                                   <input type="text" id="txtWpUrl"  value="" />
+                                   <button id="addBlogsNextBtn" value="submit" class="button-submit"><span>Add</span></button>
+                               </fieldset>
+                           </form>
+						   <div><strong>TIP</strong>:In the blog url field enter the location of your wordpress sites. eg. http://wordpress.com/</div>
+					</div>
+				</div>
+				
+				<!--  blog detailed screen -->
+				<div id="pnlBlog" class="screen" style="display: none;">
+				
+					<h3 id="pnlBlog_blogTitle"></h3>
+				
+					<ul id="pnlBlog_list" class="list">
+						<li><a href="#" id="commentsActionLink">Comments</a></li>
+						<li><a href="#" id="newPostActionLink">New Post</a></li>
+						<li><a href="#" id="optionsActionLink">Options</a></li>
+					</ul>
+					
+					<p>
+						<a id="pnlBlog_removebtn" href="#" class="button-flat">Remove</a>
+					</p>
+				</div>
+				
+				<!--  New Post Screen -->
+				<div id="pnlNewPost" class="screen" style="display: none;">
+				 	<h4>Write a new post</h4>
+					<div>
+						<label>Title</label>
+						<input type="text" id="newPostTitle" value="" />
+					</div>	
+					<div>
+						<label>Content</label>
+						<textarea id="newPostContent"></textarea>
+					</div>
+					<div>
+						<label>tags</label>
+						<input type="text" id="newPostTags" value="" />
+						<span class="howto">Separate tags with commas.</span>
+					</div>	
+				</div>
+				
+				<!--  comments list screen -->
+				<div id="pnlComments" class="screen" style="display: none;">
+				    <h3 id="pnlComments_blogTitle"></h3>			
+					<div id="the-comment-list" class="list:comment">
+					
+					</div>
+					<div style="clear: both;"></div>				
+				</div>
+								
+				<!--  single comment screen -->		
+				<div id="pnlComment" class="screen" style="display: none;">
+    				
+					<div id="the-comment"> </div>
+					
+					<a href="#" id="comment_reply_btn" class="button-flat" style="display: none;">Reply</a>
+					
+					<div id="com-reply" style="display:none;">
+						<div id="replyrow" class="box-flat">
+							<div id="replyhead">Reply to Comment</div>
+						
+							<!-- div id="edithead" style="display:none;">
+								<div class="inside">
+								<label for="author">Name</label>
+								<input type="text" name="newcomment_author" size="50" value="" tabindex="101" id="author" />
+								</div>
+						
+								<div class="inside">
+								<label for="author-email">E-mail</label>
+						
+								<input type="text" name="newcomment_author_email" size="50" value="" tabindex="102" id="author-email" />
+								</div>
+						
+								<div class="inside">
+								<label for="author-url">URL</label>
+								<input type="text" id="author-url" name="newcomment_author_url" size="103" value="" tabindex="103" />
+								</div>
+								<div style="clear:both;"></div>
+							</div -->
+						
+							<div id="replycontainer"><textarea name="replycontent" id="replycontent"></textarea></div>
+						
+							<ul id="replysubmit" class="nav-horizontal-rounded">
+								<li class="two-piece"><a href="#" id="comment_cancel_reply_btn" >Cancel</a></li>
+								<li class="two-piece"><a href="#" id="comment_submit_reply_btn" >Submit</a></li>
+							</ul>
+							<div style="clear:both;"></div>
+						</div>
+					</div>
+				</div>				
+								
+				<!--  blog options screen -->
+				<div id="pnlConfig" class="screen" style="display: none;">
+					
+					<div class="box-flat">	
+						<h3 id="pnlConfig_blogTitle"></h3>
+						<h4>Blog Settings</h4>
+						
+						<label>Username</label>
+						<input type="text" id="txtConfigUserName" value="" />
+				        
+						<label>Password</label>
+						<input type="password" id="txtConfigPassword" value="" />
+					</div>
+				
+				</div>
+				
+				
+				<!-- SETTINGS -->
+				<div id="pnlSettings" class="screen" style="display: none;">
+					<h3>MoPress Settings</h3>
+						
+					<form  onsubmit="return false;" class="box-flat">
+                    	<h4>Home Screen Refresh interval</h4>
+						<fieldset>
+						<select id="drop_refresh">
+							<option id="settingsDropTwo" value="120000">2 minutes</option>
+							<option id="settingsDropFive" value="300000" selected="selected">5 minutes</option>
+							<option id="settingsDropFive" value="600000">10 minutes</option>
+							<option id="settingsDropFive" value="900000">15 minutes</option>
+							<option id="settingsDropFive" value="1800000">30 minutes</option>
+						</select>
+						<p>
+							On some S60 5th Edition devices, such as the Nokia N97, users can add the widget to the home screen.
+							This option set the comments refresh interval when in Home Screen.
+							</p>
+						</fieldset>
+					</form>
+	
+					<div class="box-flat">
+						<h4>Remote Logging</h4>
+						<p>The remote debug option causes the widget to produce a detailed log of activity. 
+						This log allows our developers to inspect the internal workings of the application and pinpoint the cause of problems. 
+						Enabling debugging is only usually required when requested by the MoPress Support team.</p>
+						<label for="remote_log">Log enabled</label>
+						<div id="remote_log_container">							
+						<!-- input class="toggle-switch" id="remote_log"  name="remote_log" type="checkbox"/ -->
+						</div>
+							
+					</div>
+					
+				</div><!-- end of 'settings' -->  
+				
+				<!-- About Screen -->
+                <div id="pnlAbout" class="screen" style="display: none;">
+                    <div id="aboutContent">
+                        <p>
+                            A Nokia app for WordPress sites.
+                        </p>
+                        <p>
+                            Designed & developed by Danais.
+                        </p>
+                        <p>
+                            For more information or to submit an issue visit our web site at
+							<a href="http://www.danais.it" onclick="widget.openURL(this.href); return false;" class="external">www.danais.it</a>
+                         </p>
+						<!-- a href="#" onclick="WP.Layout.goBack(); return false;" class="button-flat">Home</a -->
+                    </div>
+                </div>						
+			</div> <!-- End Content div -->
+ 
+			<div id="footer" class="ft-large" style="display: none;">
+				<ul id="footer_list" class="nav-horizontal-flat">
+<!--				<li class="four-piece">	<a id="btnNavNext" href="#">Not</a></li>
+					<li class="four-piece" style="display: none;">	<a id="fakebtnNavNext" href="#"></a></li> -->
+				</ul>
+			</div>	
+
+		</div> 
+		
+		<div id="mini_view" style="display: none;">
+			<table id="mini_view_table" class="miniview_tweets" cellspacing="0">
+				<tr class="miniview_tweets">
+					<td class ="mini_view_table_image"><img src="images/Icon-mini.png"/></td>
+					<td id="mini_view_content" class="mini_view_table_content">No updates!</td>
+				</tr>
+			</table>
+		</div>
+
+	</body>
+</html>

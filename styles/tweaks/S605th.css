@@ -1,0 +1,43 @@
+/*slight increase in font size on large screen devices*/
+body {
+	font-size: 110%;
+}
+
+
+#content {
+	padding-bottom : 45px;
+	padding-top : 70px;  /*the top bar is height 68px*/
+}
+
+#top_bar {
+	position: fixed;
+}
+
+#replycontent {
+	height: 180px;
+}
+
+#newPostContent {
+	height: 300px;
+}
+
+/** Turning ON all specific Touch Elements, turning off non touch exclusive elements */
+#splash_img {
+	display: inline;
+}
+
+#button_t1 {
+	display: block;
+	position: absolute;
+	top:11px;
+	left:2px;
+	width: 60px;
+}
+
+#button_t2 {
+	display: block;
+	position: absolute;
+	top:11px;
+	right:2px;
+	width: 60px;
+}

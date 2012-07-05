@@ -1,0 +1,76 @@
+/* ******** */
+/* MINIVIEW */
+/* ******** */
+#mini_view {
+    width: 308px;
+    height: 85px;
+	background: url(../images/img-branding-background.png) repeat-x bottom #fff;
+    overflow: hidden;
+}
+
+#mini_view th {
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	background: #7fcce5;
+	padding: 4px 6px;
+	text-align: left;
+}
+
+#mini_view .miniview_tweets {
+    width: 100%;
+	background: url(../images/img-box-flat.png) repeat-x bottom #fff;
+}
+
+#mini_view .mini_view_table_image {
+    width: 80px;
+	min-width: 80px;
+    vertical-align: top;
+}
+
+#mini_view .mini_view_table_image img{
+    width: 80px;
+	min-width: 80px;
+    vertical-align: top;
+}
+
+
+#mini_view .mini_view_table_content {
+    padding: 2px;
+    vertical-align: middle;
+	text-align:center;
+	font-size: large;
+}
+
+/* non sono usati ancora */
+#mini_view .miniview_tweets .tweet{
+    background: url(images/tr_bg.png) repeat-x bottom #fff;
+}
+
+#mini_view .miniview_tweets .tweet .image{
+    padding: 1px 3px 1px 2px;
+    width: 16px;
+	min-width: 16px;
+    vertical-align: top;
+}
+
+#mini_view .miniview_tweets .tweet .image img{ 
+    width: 100%;
+}
+
+#mini_view .miniview_tweets .tweet .tweet_content{
+    padding: 2px;
+    vertical-align: top;
+}
+
+#mini_view .miniview_tweets .tweet .name {
+    color: #0099cc;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#mini_view .miniview_tweets .tweet .status {
+    color: #666666;
+    font-size: 10px;
+    float: left;
+}

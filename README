@@ -1,0 +1,35 @@
+MoPress for Nokia allows you to write simple posts and manage comments of your WordPress blog. Both WordPress.com and self-hosted WordPress (2.7 or higher) sites are supported.
+
+Some Widget applications may not work on early device software versions (firmware) on some devices. To ensure this Widget application functions properly, it is recommended that your device is updated with the latest device software by using Nokia Software Updater.
+
+- http://www.youtube.com/watch?v=lABL-sPd4Ko
+- http://www.danais.it/web/eng/index.html
+- http://store.ovi.com/content/25206
+
+
+License information.
+--------------------
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+See the file "LICENSE.txt" for the full text of the GNU General Public License.
+
+
+Contact
+-------
+The MoPress for Nokia team consists of:
+Danilo Ercoli - ercoli@gmail.com  - Lead developer.
+
+Special Thanks to Danais srl, www.danais.it, that has actively support the development of this software by giving me testing devices and food.
